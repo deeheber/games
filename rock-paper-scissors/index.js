@@ -32,18 +32,16 @@ const { red, yellow, green } = require('chalk');
       }]);
   } while (prompt.playAgain);
 
+  console.log('----------------------');
   console.log('Thanks for playing!');
-  // TODO add formatting here
-  console.log(score);
-  console.log('Final Score');
-  console.log('------------------');
+  console.log('----------------------');
   console.log(`Computer: ${score.computer}`);
   console.log(`You: ${score.user}`);
   console.log(`Tie: ${score.tie}`);
   console.log(`Total rounds played: ${rounds}`);
+  console.log('----------------------');
 
   if (score.user > score.computer) {
-    console.log('-------------------');
     console.log(green('Congratulations, you won overall!'));
   }
 

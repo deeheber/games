@@ -2,6 +2,7 @@ const inquirer = require('inquirer');
 
 (async function main () {
   const score = { computer: 0, user: 0, tie: 0 };
+  let rounds = 0;
   let prompt;
   let computer;
 
@@ -19,6 +20,7 @@ const inquirer = require('inquirer');
     const winner = calculateWinner(user, computer);
 
     score[winner]++;
+    rounds++;
 
     prompt = await inquirer
       .prompt([{
@@ -32,6 +34,25 @@ const inquirer = require('inquirer');
   console.log('Thanks for playing!');
   // TODO add formatting here
   console.log(score);
+  console.log('Final Score');
+  console.log('------------------');
+  console.log(`Computer: ${score.computer}`);
+  console.log(`You: ${score.user}`);
+  console.log(`Tie: ${score.tie}`);
+  console.log(`Total rounds played: ${rounds}`);
+
+  if (score.user > score.computer) {
+    console.log('-------------------');
+    console.log('Final result: Congratulations, you won overall!');
+  }
+
+  if (score.computer > score.user) {
+    console.log('Final result: Sorry, the computer beat you. Better luck next time.');
+  }
+
+  if (score.computer === score.user) {
+    console.log('Final result: It was a tie overall.')
+  }
 })();
 
 function getComputerChoice () {

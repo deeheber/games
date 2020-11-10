@@ -69,7 +69,6 @@ function getComputerChoice () {
 }
 
 function calculateWinner (user, computer) {
-  // TODO color the output
   console.log(`You picked: ${user}`);
   console.log(`Computer picked: ${computer}`);
 

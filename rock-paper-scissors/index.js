@@ -1,4 +1,5 @@
 const inquirer = require('inquirer');
+const { red, yellow, green } = require('chalk');
 
 (async function main () {
   const score = { computer: 0, user: 0, tie: 0 };
@@ -43,15 +44,15 @@ const inquirer = require('inquirer');
 
   if (score.user > score.computer) {
     console.log('-------------------');
-    console.log('Final result: Congratulations, you won overall!');
+    console.log(green('Congratulations, you won overall!'));
   }
 
   if (score.computer > score.user) {
-    console.log('Final result: Sorry, the computer beat you. Better luck next time.');
+    console.log(red('Sorry, the computer beat you. Better luck next time.'));
   }
 
   if (score.computer === score.user) {
-    console.log('Final result: It was a tie overall.')
+    console.log(yellow('It was a tie overall.'));
   }
 })();
 
@@ -76,51 +77,51 @@ function calculateWinner (user, computer) {
 
   if (user === 'rock') {
     if (computer === 'rock') {
-      console.log('It\'s a tie!');
+      console.log(yellow('It\'s a tie!'));
       return 'tie';
     }
 
     if (computer === 'paper') {
-      console.log('Paper covers rock.');
+      console.log(red('Paper covers rock.'));
       return 'computer';
     }
 
     if (computer === 'scissors') {
-      console.log('Rock smashes scissors.');
+      console.log(green('Rock smashes scissors.'));
       return 'user';
     }
   }
 
   if (user === 'scissors') {
     if (computer === 'scissors') {
-      console.log('It\'s a tie!');
+      console.log(yellow('It\'s a tie!'));
       return 'tie';
     }
 
     if (computer === 'paper') {
-      console.log('Scissors cuts paper.');
+      console.log(green('Scissors cuts paper.'));
       return 'user';
     }
 
     if (computer === 'rock') {
-      console.log('Rock smashes scissors.');
+      console.log(red('Rock smashes scissors.'));
       return 'computer';
     }
   }
 
   if (user === 'paper') {
     if (computer === 'paper') {
-      console.log('It\'s a tie!');
+      console.log(yellow('It\'s a tie!'));
       return 'tie';
     }
 
     if (computer === 'rock') {
-      console.log('Paper covers rock.');
+      console.log(green('Paper covers rock.'));
       return 'user';
     }
 
     if (computer === 'scissors') {
-      console.log('Scissors cuts paper.');
+      console.log(red('Scissors cuts paper.'));
       return 'computer';
     }
   }

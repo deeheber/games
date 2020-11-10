@@ -1,7 +1,11 @@
 # games
 Programming various games for fun
 
-## Coming soon
-1. Rock paper scissors
-2. Tic tac toe
-3. Sudoku
+## Games Available
+- Rock paper scissors
+
+## Coming Soon
+- Tic tac toe
+- Sudoku
+
+**Looking for any other ideas too**

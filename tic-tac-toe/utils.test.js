@@ -1,4 +1,8 @@
-const { isBoardFull, checkForWinner } = require('./utils');
+const { addPlayToBoard, checkForWinner } = require('./utils');
+
+describe('addPlayToBoard', () => {
+  // TODO add tests
+});
 
 describe('checkForWinner', () => {
   it('winner found 1', () => {
@@ -73,37 +77,5 @@ describe('checkForWinner', () => {
     } catch (err) {
       expect(err.message).toEqual('Invalid player: T');
     }
-  });
-});
-
-describe('isBoardFull', () => {
-  it('board is full', () => {
-    const board = [
-      ['O', 'X', 'X'], 
-      ['O', 'O', 'X'], 
-      ['X', 'X', 'O']
-    ];
-
-    expect(isBoardFull(board)).toEqual(true);
-  });
-
-  it('board is empty', () => {
-    const board = [
-      ['', '', ''], 
-      ['', '', ''], 
-      ['', '', '']
-    ];
-
-    expect(isBoardFull(board)).toEqual(false);
-  });
-
-  it('board is partially full', () => {
-    const board = [
-      ['X', 'O', ''], 
-      ['O', '', ''], 
-      ['', 'X', 'X']
-    ];
-
-    expect(isBoardFull(board)).toEqual(false);
   });
 });

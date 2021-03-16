@@ -1,13 +1,16 @@
-function isBoardFull (board) {
+function addPlayToBoard (play, board) {
+  let counter = 1;
+
   for (let x = 0; x < board.length; x++) {
     for (let y = 0; y < board[0].length; y++) {
-      if (board[x][y] === '') {
-        return false;
+      if (play === counter) {
+        return { x, y };
       }
+      counter++
     }
   }
 
-  return true;
+  throw new Error('Error in addPlayToBoard');
 }
 
 function checkForWinner (player, board) {
@@ -52,7 +55,19 @@ function checkForWinner (player, board) {
   return winner;
 }
 
+function validatePrompt (input, played) {
+  // I didn't like inquirer's built in validator
+  if (input > 9 || input < 1) {
+    throw new Error('Number must be in range 1 - 9');
+  }
+
+  if (played.includes(input)) {
+    throw new Error(`Square ${input} has already been played. Select another square`);
+  }
+}
+
 module.exports = {
-  isBoardFull,
-  checkForWinner
+  addPlayToBoard,
+  checkForWinner,
+  validatePrompt
 };

@@ -1,40 +1,4 @@
-function addPlayToBoard (play, board) {
-  let counter = 1;
-
-  for (let x = 0; x < board.length; x++) {
-    for (let y = 0; y < board[0].length; y++) {
-      if (play === counter) {
-        return { x, y };
-      }
-      counter++
-    }
-  }
-
-  throw new Error('Error in addPlayToBoard');
-}
-
-function checkForWinner (player, board) {
-  /**
-   * Potential future improvement
-   * Could refactor to memoize the played squares
-   * so we won't have to traverse the entire 2d 
-   * array each time.
-   */
-  if (player !== 'X' && player !== 'O') {
-    throw new Error(`Invalid player: ${player}`);
-  }
-  const played = [];
-  let counter = 1;
-
-  for (let x = 0; x < board.length; x++) {
-    for (let y = 0; y < board[0].length; y++) {
-      if (board[x][y] === player) {
-        played.push(counter);
-      }
-      counter++
-    }
-  }
-
+function checkForWinner (played) {
   const winningCombos = [
     [1, 2, 3],
     [4, 5, 6],
@@ -47,12 +11,22 @@ function checkForWinner (player, board) {
   let winner = false;
 
   winningCombos.forEach(([a, b, c]) => {
-    if (played.includes(a) && played.includes(b) && played.includes(c)) {
+    if (played.has(a) && played.has(b) && played.has(c)) {
       winner = true;
     }
   });
 
   return winner;
+}
+
+function printBoard (board) {
+  console.log(`
+  ${board[0][0] || 1} | ${board[0][1] || 2} | ${board[0][2] || 3} 
+  -----------
+  ${board[1][0] || 4} | ${board[1][1] || 5} | ${board[1][2] || 6}
+  -----------
+  ${board[2][0] || 7} | ${board[2][1] || 8} | ${board[2][2] || 9}
+`);
 }
 
 function validatePrompt (input, played) {
@@ -61,13 +35,13 @@ function validatePrompt (input, played) {
     throw new Error('Number must be in range 1 - 9');
   }
 
-  if (played.includes(input)) {
+  if (played['X'].has(input) || played['O'].has(input)) {
     throw new Error(`Square ${input} has already been played. Select another square`);
   }
 }
 
 module.exports = {
-  addPlayToBoard,
   checkForWinner,
+  printBoard,
   validatePrompt
 };

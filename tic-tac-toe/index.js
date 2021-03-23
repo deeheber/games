@@ -1,5 +1,5 @@
 const inquirer = require('inquirer');
-const { yellow, green } = require('chalk');
+const { yellow, green, blue } = require('chalk');
 const { checkForWinner, printBoard, validatePrompt } = require('./utils');
 
 (async function main () {
@@ -27,9 +27,9 @@ const { checkForWinner, printBoard, validatePrompt } = require('./utils');
   let prompt;
   
   // TODO add a cool ascii art type of intro/instructions here
-  console.log('Welcome to tic-tac-toe.');
-  console.log('Get three in a row across, up/down, or diagonal and you win!');
-  console.log('Select 1 - 9 to get started');
+  console.log(blue('Welcome to tic-tac-toe.'));
+  console.log(blue('Get three in a row across, up/down, or diagonal and you win!'));
+  console.log(blue('Select 1 - 9 to get started'));
 
   do {
     printBoard(board);
@@ -39,7 +39,7 @@ const { checkForWinner, printBoard, validatePrompt } = require('./utils');
         .prompt([{
           type: 'number',
           name: 'selection',
-          message: `Player ${currentPlayer}, please make your choice`,
+          message: `Player ${currentPlayer}, please make your choice`
         }]);
 
       validatePrompt(prompt.selection, played);

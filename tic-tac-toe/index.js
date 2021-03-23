@@ -1,4 +1,5 @@
 const inquirer = require('inquirer');
+const { yellow, green } = require('chalk');
 const { checkForWinner, printBoard, validatePrompt } = require('./utils');
 
 (async function main () {
@@ -21,7 +22,7 @@ const { checkForWinner, printBoard, validatePrompt } = require('./utils');
   ];
 
   let played = { 'X': new Set(), 'O': new Set() };
-  let turn = 'X';
+  let currentPlayer = 'X';
   let winner = false;
   let prompt;
   
@@ -38,7 +39,7 @@ const { checkForWinner, printBoard, validatePrompt } = require('./utils');
         .prompt([{
           type: 'number',
           name: 'selection',
-          message: `Player ${turn}, please make your choice`,
+          message: `Player ${currentPlayer}, please make your choice`,
         }]);
 
       validatePrompt(prompt.selection, played);
@@ -48,31 +49,25 @@ const { checkForWinner, printBoard, validatePrompt } = require('./utils');
     }
 
     // Mark square as played
-    played[turn].add(prompt.selection);
+    played[currentPlayer].add(prompt.selection);
     const [ x, y ] = numToArray[prompt.selection];
-    board[x][y] = turn;
+    board[x][y] = currentPlayer;
 
     // Check to see if they won
-    if (checkForWinner(played[turn])) {
-      winner = turn;
+    if (checkForWinner(played[currentPlayer])) {
+      winner = currentPlayer;
       break;
     }
 
-    // Switch turn to next player
-    if (turn === 'X') {
-      turn = 'O';
-    } else if (turn === 'O') {
-      turn = 'X';
-    } else {
-      throw new Error(`Invalid turn type: ${turn}`);
-    }
+    // Switch to next player
+    currentPlayer === 'X' ? currentPlayer = 'O' : currentPlayer = 'X';
   } while ((played['X'].size + played['O'].size) < 9);
   // TODO better print graphics here
   printBoard(board);
 
   if (winner) {
-    console.log(`Winner is ${winner}`);
+    console.log(green(`Winner is ${winner}`));
   } else {
-    console.log('It was a tie!');
+    console.log(yellow('It was a tie!'));
   }
-})()
+})();

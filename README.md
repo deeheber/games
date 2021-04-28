@@ -8,5 +8,6 @@ Programming various games for fun
 - Tic tac toe
 - Sudoku
 - Conway's game of life
+- Plain deck of cards
 
 **Looking for any other ideas too**

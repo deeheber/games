@@ -7,5 +7,5 @@ Programming various games for fun
 
 ## Coming Later
 - Conway's game of life
-- Plain deck of cards
+- Plain deck of cards (blackjack maybe?)
 - Sudoku

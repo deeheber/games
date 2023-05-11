@@ -1,14 +1,23 @@
 const ROW = parseInt(process.env.ROW) || 3
 const COLUMN = parseInt(process.env.COLUMN) || 3
 const ROUNDS = parseInt(process.env.ROUNDS) || 1
+const LIVE_CELLS = parseInt(process.env.LIVE_CELLS) || -1
 
 // Init grid of cells
+let liveCellCount = 0
 const grid = []
 for (let row = 0; row <= ROW; row++) {
   const currentRow = []
   for (let column = 0; column <= COLUMN; column++) {
-    // TODO: parameterize how many live cells on init via env var
-    currentRow.push('*')
+    if (LIVE_CELLS === -1) {
+      // init to all alive cells
+      currentRow.push('*')
+    } else if (liveCellCount < LIVE_CELLS) {
+      currentRow.push('*')
+      liveCellCount += 1
+    } else {
+      currentRow.push('-')
+    }
   }
 
   grid.push(currentRow)

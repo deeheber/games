@@ -18,6 +18,6 @@ For the sake of this game, a dead cell is represented by `-` and a live cell is 
 1. Make sure you have [NodeJS](https://nodejs.org/en/) installed
 2. In the terminal run `node index.js` to run the game
 
-By default this will be a 3 x 3 board. It will also do one round. You can change the size of the board and number of rounds by passing in arguments to the command line.
+By default this will be a 3 x 3 board. It will also do one round and default to a grid with all live cells. You can change the size of the board, number of rounds, and number of live cells at the start by passing in arguments to the command line.
 
-Example: `ROW=5 COLUMN=5 ROUNDS=10 node index.js` will create a 5 x 5 board and run 10 rounds.
+Example: `ROW=5 COLUMN=5 ROUNDS=10 LIVE_CELLS=7 node index.js` will create a 5 x 5 board and run 10 rounds.

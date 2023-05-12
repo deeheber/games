@@ -1,4 +1,4 @@
-const { red } = require('chalk')
+import chalk from 'chalk'
 
 function checkForWinner(played) {
   const winningCombos = [
@@ -34,19 +34,17 @@ function printBoard(board) {
 
 function validatePrompt(input, played) {
   // I didn't like inquirer's built in validator
-  if (input > 9 || input < 1) {
-    throw new Error(red('Number must be in range 1 - 9'))
+  if (isNaN(input) || input > 9 || input < 1) {
+    throw new Error(chalk.red('Number must be in range 1 - 9'))
   }
 
   if (played['X'].has(input) || played['O'].has(input)) {
     throw new Error(
-      red(`Square ${input} has already been played. Select another square`)
+      chalk.red(
+        `Square ${input} has already been played. Select another square`
+      )
     )
   }
 }
 
-module.exports = {
-  checkForWinner,
-  printBoard,
-  validatePrompt,
-}
+export { checkForWinner, printBoard, validatePrompt }

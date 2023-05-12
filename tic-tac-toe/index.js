@@ -1,7 +1,6 @@
-const inquirer = require('inquirer')
-const { yellow, green, blue } = require('chalk')
-const { checkForWinner, printBoard, validatePrompt } = require('./utils')
-
+import inquirer from 'inquirer'
+import chalk from 'chalk'
+import { checkForWinner, printBoard, validatePrompt } from './utils.js'
 ;(async function main() {
   const numToArray = {
     1: [0, 0],
@@ -27,11 +26,11 @@ const { checkForWinner, printBoard, validatePrompt } = require('./utils')
   let prompt
 
   // TODO add a cool ascii art type of intro/instructions here
-  console.log(blue('Welcome to tic-tac-toe.'))
+  console.log(chalk.blue('Welcome to tic-tac-toe.'))
   console.log(
-    blue('Get three in a row across, up/down, or diagonal and you win!')
+    chalk.blue('Get three in a row across, up/down, or diagonal and you win!')
   )
-  console.log(blue('Select 1 - 9 to get started'))
+  console.log(chalk.blue('Select 1 - 9 to get started'))
 
   do {
     printBoard(board)
@@ -69,8 +68,8 @@ const { checkForWinner, printBoard, validatePrompt } = require('./utils')
   printBoard(board)
 
   if (winner) {
-    console.log(green(`Winner is ${winner}`))
+    console.log(chalk.green(`Winner is ${winner}`))
   } else {
-    console.log(yellow('It was a tie!'))
+    console.log(chalk.yellow('It was a tie!'))
   }
 })()

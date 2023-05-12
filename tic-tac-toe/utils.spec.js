@@ -1,4 +1,5 @@
-const { checkForWinner, printBoard, validatePrompt } = require('./utils')
+import jest from 'jest-mock'
+import { checkForWinner, printBoard, validatePrompt } from './utils.js'
 
 describe('checkForWinner', () => {
   let played
@@ -42,6 +43,7 @@ describe('checkForWinner', () => {
 
 describe('printBoard', () => {
   beforeEach(() => {
+    // Don't spam the console with logs for tests
     console.log = jest.fn()
   })
 
@@ -115,6 +117,12 @@ describe('validatePrompt', () => {
 
   it('Errors on low number', () => {
     expect(() => validatePrompt(-1, played)).toThrow(
+      'Number must be in range 1 - 9'
+    )
+  })
+
+  it('Errors on non number', () => {
+    expect(() => validatePrompt('h', played)).toThrow(
       'Number must be in range 1 - 9'
     )
   })

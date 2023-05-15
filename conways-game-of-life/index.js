@@ -1,31 +1,37 @@
-const ROW = parseInt(process.env.ROW) || 3
-const COLUMN = parseInt(process.env.COLUMN) || 3
-const ROUNDS = parseInt(process.env.ROUNDS) || 1
-const LIVE_CELLS = parseInt(process.env.LIVE_CELLS) || -1
+const ROWS = process.env.ROWS ? parseInt(process.env.ROWS) : 3
+const COLUMNS = process.env.COLUMNS ? parseInt(process.env.COLUMNS) : 3
+const ROUNDS = process.env.ROUNDS ? parseInt(process.env.ROUNDS) : 1
+const LIVE_CELLS = process.env.LIVE_CELLS
+  ? parseInt(process.env.LIVE_CELLS)
+  : -1
 
-// Init grid of cells
-let liveCellCount = 0
-const grid = []
-for (let row = 0; row <= ROW; row++) {
-  const currentRow = []
-  for (let column = 0; column <= COLUMN; column++) {
-    if (LIVE_CELLS === -1) {
-      // init to all alive cells
-      currentRow.push('*')
-    } else if (liveCellCount < LIVE_CELLS) {
-      currentRow.push('*')
-      liveCellCount += 1
-    } else {
-      currentRow.push('-')
+function createGrid() {
+  // Init grid of cells
+  let liveCellCount = 0
+  const grid = []
+  for (let row = 0; row < ROWS; row++) {
+    const currentRow = []
+    for (let column = 0; column < COLUMNS; column++) {
+      if (LIVE_CELLS === -1) {
+        // init to all alive cells
+        currentRow.push('*')
+      } else if (liveCellCount < LIVE_CELLS) {
+        currentRow.push('*')
+        liveCellCount += 1
+      } else {
+        currentRow.push('-')
+      }
     }
+
+    grid.push(currentRow)
   }
 
-  grid.push(currentRow)
-}
+  console.log('------------------------')
+  console.log(`Starting grid`)
+  console.log(grid)
 
-console.log('------------------------')
-console.log(`Starting grid`)
-console.log(grid)
+  return grid
+}
 
 function transition(grid) {
   // copy grid - we'll use this to traverse and reference neighbors
@@ -41,11 +47,11 @@ function transition(grid) {
       const directions = [
         [0, -1],
         [0, 1],
+        [1, -1],
+        [1, 0],
         [1, 1],
         [-1, -1],
         [-1, 0],
-        [1, 0],
-        [1, -1],
         [-1, 1],
       ]
 
@@ -54,7 +60,7 @@ function transition(grid) {
         const newY = col + y
         // check if neighbor exists on the grid
         // prettier-ignore
-        if (newX >= 0 && newX <= ROW && newY >= 0 && newY <= COLUMN) {
+        if (newX >= 0 && newX < ROWS && newY >= 0 && newY < COLUMNS) {
           const neighbor = copy[newX][newY]
           if (neighbor === '*') {
             // live neigbor count it
@@ -79,9 +85,14 @@ function transition(grid) {
   return grid
 }
 
+const grid = createGrid()
+
 for (let counter = 0; counter < ROUNDS; counter++) {
   console.log('------------------------')
   console.log(`Round ${counter + 1}`)
   console.log(transition(grid))
   console.log('------------------------')
 }
+
+exports.createGrid = createGrid
+exports.transition = transition

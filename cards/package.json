@@ -1,0 +1,23 @@
+{
+  "name": "cards",
+  "version": "1.0.0",
+  "description": "Deck of cards",
+  "engine": {
+    "node": ">=18.16.0"
+  },
+  "scripts": {
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,md}\"",
+    "test": "jest",
+    "build": "rm -rf dist && tsc"
+  },
+  "author": "Danielle Heberling",
+  "devDependencies": {
+    "@babel/preset-typescript": "^7.17.12",
+    "@types/jest": "^29.5.1",
+    "jest": "^29.5.0",
+    "prettier": "^2.8.8",
+    "ts-jest": "^29.1.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  }
+}

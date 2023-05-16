@@ -12,3 +12,7 @@ Programming various games for fun
 
 - Plain deck of cards (will probably evolve into blackjack or some other card game)
 - Sudoku
+
+## How to run
+
+`cd` into the directory for the game you'd like to play and follow the instructions in the `README.md` file.

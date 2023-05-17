@@ -31,11 +31,15 @@ describe('Deck', () => {
     expect(myDeck.cards.length).toBe(51)
   })
 
-  it.skip('draws card at specified index', () => {
-    // TODO
+  it('draws card at specified index', () => {
+    const fifteenthCard = myDeck.drawCard(14)
+    expect(fifteenthCard).toEqual({ suit: 'heart', value: '3' })
+    expect(myDeck.cards.length).toBe(50)
   })
 
-  it.skip('shuffles the deck', () => {
-    // TODO
+  it('shuffles the deck', () => {
+    const originalCards = [...myDeck.cards]
+    myDeck.shuffle()
+    expect(myDeck.cards).not.toEqual(originalCards)
   })
 })

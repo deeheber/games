@@ -45,6 +45,8 @@ export class Deck {
         this.cards.push({ suit, value })
       }
     }
+
+    return
   }
 
   drawCard(index?: number): Card | -1 {
@@ -74,6 +76,22 @@ export class Deck {
   }
 
   shuffle(): void {
-    // TODO
+    // Fisher-Yates shuffle
+    let currentIndex = this.cards.length
+    let temporaryValue: Card
+    let randomIndex: number
+
+    while (currentIndex !== 0) {
+      // Pick a remaining element
+      randomIndex = Math.floor(Math.random() * currentIndex)
+      currentIndex -= 1
+
+      // Swap it with the current element
+      temporaryValue = this.cards[currentIndex]
+      this.cards[currentIndex] = this.cards[randomIndex]
+      this.cards[randomIndex] = temporaryValue
+    }
+
+    return
   }
 }

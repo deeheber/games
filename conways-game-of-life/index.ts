@@ -5,7 +5,7 @@ const LIVE_CELLS = process.env.LIVE_CELLS
   ? parseInt(process.env.LIVE_CELLS)
   : -1
 
-function createGrid() {
+function createGrid(): string[][] {
   // Init grid of cells
   let liveCellCount = 0
   const grid = []
@@ -33,9 +33,9 @@ function createGrid() {
   return grid
 }
 
-function transition(grid) {
+function transition(grid: string[][]) {
   // copy grid - we'll use this to traverse and reference neighbors
-  const copy = []
+  const copy: string[][] = []
   for (let i = 0; i < grid.length; i++) {
     copy[i] = grid[i].slice()
   }

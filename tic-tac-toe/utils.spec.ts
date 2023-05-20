@@ -1,8 +1,7 @@
-import jest from 'jest-mock'
-import { checkForWinner, printBoard, validatePrompt } from './utils.js'
+import { checkForWinner, printBoard, validatePrompt } from './utils'
 
 describe('checkForWinner', () => {
-  let played
+  let played: Record<string, Set<number>>
   beforeEach(() => {
     played = { X: new Set(), O: new Set() }
   })
@@ -103,7 +102,7 @@ describe('printBoard', () => {
 })
 
 describe('validatePrompt', () => {
-  const played = { X: new Set(), O: new Set() }
+  const played: Record<string, Set<number>> = { X: new Set(), O: new Set() }
 
   it('Passes validation', () => {
     expect(() => validatePrompt(6, played)).not.toThrow()

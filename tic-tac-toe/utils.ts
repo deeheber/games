@@ -1,6 +1,6 @@
 import chalk from 'chalk'
 
-function checkForWinner(played) {
+function checkForWinner(played: Set<number>) {
   const winningCombos = [
     [1, 2, 3],
     [4, 5, 6],
@@ -22,7 +22,7 @@ function checkForWinner(played) {
   return false
 }
 
-function printBoard(board) {
+function printBoard(board: string[][]) {
   console.log(`
     ${board[0][0] || 1} | ${board[0][1] || 2} | ${board[0][2] || 3}
     -----------
@@ -32,7 +32,7 @@ function printBoard(board) {
   `)
 }
 
-function validatePrompt(input, played) {
+function validatePrompt(input: any, played: Record<string, Set<number>>) {
   // I didn't like inquirer's built in validator
   if (isNaN(input) || input > 9 || input < 1) {
     throw new Error(chalk.red('Number must be in range 1 - 9'))

@@ -1,8 +1,8 @@
 import inquirer from 'inquirer'
 import chalk from 'chalk'
-import { checkForWinner, printBoard, validatePrompt } from './utils.js'
+import { checkForWinner, printBoard, validatePrompt } from './utils'
 ;(async function main() {
-  const numToArray = {
+  const numToArray: Record<number, Array<number>> = {
     1: [0, 0],
     2: [0, 1],
     3: [0, 2],
@@ -14,15 +14,18 @@ import { checkForWinner, printBoard, validatePrompt } from './utils.js'
     9: [2, 2],
   }
 
-  const board = [
+  const board: string[][] = [
     ['', '', ''],
     ['', '', ''],
     ['', '', ''],
   ]
 
-  let played = { X: new Set(), O: new Set() }
+  let played: Record<string, Set<number>> = {
+    X: new Set(),
+    O: new Set(),
+  }
   let currentPlayer = 'X'
-  let winner = false
+  let winner: string | null = null
   let prompt
 
   // TODO add a cool ascii art type of intro/instructions here
@@ -45,7 +48,7 @@ import { checkForWinner, printBoard, validatePrompt } from './utils.js'
       ])
 
       validatePrompt(prompt.selection, played)
-    } catch (err) {
+    } catch (err: any) {
       console.log(err.message)
       continue
     }

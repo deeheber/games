@@ -16,7 +16,9 @@ For the sake of this game, a dead cell is represented by `-` and a live cell is 
 ## Instructions
 
 1. Make sure you have [NodeJS](https://nodejs.org/en/) installed
-2. In the terminal run `node index.js` to run the game
+2. `npm install` to install your dependencies
+3. `npm start` begins the game
+4. `npm test` runs unit tests
 
 By default this will be a 3 x 3 board. It will also do one round and default to a grid with all live cells. You can change the size of the board, number of rounds, and number of live cells at the start by passing in arguments to the command line.
 

@@ -1,6 +1,8 @@
 import chalk from 'chalk'
 
-function getComputerChoice() {
+type Choice = 'rock' | 'paper' | 'scissors'
+
+function getComputerChoice(): Choice {
   // random number between 0 - 2
   const randomNum = Math.floor(Math.random() * Math.floor(3))
 
@@ -14,7 +16,10 @@ function getComputerChoice() {
   }
 }
 
-function calculateWinner(user, computer) {
+function calculateWinner(
+  user: Choice,
+  computer: Choice
+): 'user' | 'computer' | 'tie' {
   console.log(`You picked: ${user}`)
   console.log(`Computer picked: ${computer}`)
 

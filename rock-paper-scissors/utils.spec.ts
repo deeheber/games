@@ -1,5 +1,4 @@
-import jest from 'jest-mock'
-import { getComputerChoice, calculateWinner } from './utils.js'
+import { getComputerChoice, calculateWinner } from './utils'
 
 describe('Rock paper scissors utils', () => {
   // Don't spam console.logs to test output

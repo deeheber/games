@@ -1,6 +1,6 @@
 import inquirer from 'inquirer'
 import chalk from 'chalk'
-import { getComputerChoice, calculateWinner } from './utils.js'
+import { getComputerChoice, calculateWinner } from './utils'
 ;(async function main() {
   const score = { computer: 0, user: 0, tie: 0 }
   let rounds = 0

@@ -1,4 +1,4 @@
-type Card = { suit: Suit; value: Value }
+export type Card = { suit: Suit; value: Value }
 type Suit = 'spade' | 'heart' | 'diamond' | 'club'
 type Value =
   | '2'
@@ -49,17 +49,16 @@ export class Deck {
     return
   }
 
-  drawCard(index?: number): Card | -1 {
+  drawCard(index?: number): Card {
     // If no index supplied, it pulls from the 'top' (aka the end of the array)
-    // If selected card index does not exist return -1
+    // If selected card index does not exist throw error
     if (this.cards.length <= 0) {
       console.log('Deck is empty!')
-      return -1
+      throw new Error('Deck is empty')
     }
 
     if (index && index > this.cards.length - 1) {
-      console.log('Selected card index does not exist!')
-      return -1
+      throw new Error('Selected card index does not exist!')
     }
 
     const selected = index

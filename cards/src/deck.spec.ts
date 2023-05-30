@@ -37,6 +37,12 @@ describe('Deck', () => {
     expect(myDeck.cards.length).toBe(50)
   })
 
+  it('throws error when index does not exist', () => {
+    expect(() => myDeck.drawCard(51)).toThrowError(
+      'Selected card index does not exist!'
+    )
+  })
+
   it('shuffles the deck', () => {
     const originalCards = [...myDeck.cards]
     myDeck.shuffle()

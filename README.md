@@ -11,7 +11,7 @@ Programming various games for fun
 
 ## Coming Later ™️
 
-- Use plain cards to create blackjack
+- Use plain cards to create blackjack (WIP)
 - Use plain cards to create go fish
 - Connect 4
 - Minesweeper

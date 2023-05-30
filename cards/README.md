@@ -8,7 +8,7 @@
 
 ## How to play the game(s)
 
-### Blackjack (WIP)
+### Blackjack
 
 #### Rules
 

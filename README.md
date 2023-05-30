@@ -4,14 +4,13 @@ Programming various games for fun
 
 ## Games Available
 
-- Plain deck of cards
+- Blackjack (cards)
 - Conway's game of life
 - Rock paper scissors
 - Tic tac toe
 
 ## Coming Later ™️
 
-- Use plain cards to create blackjack (WIP)
 - Use plain cards to create go fish
 - Connect 4
 - Minesweeper

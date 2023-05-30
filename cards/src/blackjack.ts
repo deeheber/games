@@ -6,20 +6,26 @@ import { Card, Deck } from './deck'
 function calculateScore(hand: Card[]): number {
   const tens = 'JQK'
   let score = 0
+  let numAces = 0
 
   for (const card of hand) {
     if (tens.includes(card.value)) {
       score += 10
     } else if (card.value === 'A') {
-      // either 1 or 11
-      const scoreWithEleven = score + 11
-      if (scoreWithEleven > 21) {
-        score += 1
-      } else {
-        score += 11
-      }
+      numAces++
+      // Aces are worth 1 by default
+      score += 1
     } else {
       score += Number(card.value)
+    }
+  }
+
+  // Add aces
+  for (let i = 0; i < numAces; i++) {
+    if (score + 10 <= 21) {
+      // Add 10 if it doesn't bust
+      // Makes the Ace worth 11
+      score += 10
     }
   }
 
@@ -27,7 +33,7 @@ function calculateScore(hand: Card[]): number {
 }
 
 async function main() {
-  console.log(chalk.green('------ Starting the game ------'))
+  console.log(chalk.yellow('------ Starting the game ------'))
 
   const deck = new Deck()
 
@@ -47,8 +53,9 @@ async function main() {
   }
 
   /** Player turn */
-  let playerScore: number
+  let playerScore: number = calculateScore(player)
   while (true) {
+    console.log('Your score: ', playerScore)
     console.log(chalk.blue(`Your hand: ${JSON.stringify(player, null, 2)}`))
 
     const prompt = await inquirer.prompt([
@@ -69,26 +76,59 @@ async function main() {
     }
 
     // Calculate current player score
-    const score = calculateScore(player)
+    playerScore = calculateScore(player)
 
-    if (score > 21) {
-      console.log(chalk.red(`You lose with score ${score}`))
+    if (playerScore > 21) {
+      console.log(chalk.red(`You bust with score ${playerScore}`))
       console.log(chalk.red(`Your hand: ${JSON.stringify(player, null, 2)}`))
       process.exit(0)
     }
   }
 
-  console.log('playerScore', playerScore)
-  /*
-   * TODO: Dealer turn
-   * Bust === true > game ends + dealer loses
-   * Check for Blackjack
-   * Hit or stay (automate)
-   * Hit === true > draw card
-   * Stay === true > dealer wins
-   *
-   * Output stats / winner
-   */
+  console.log('-----------------------------------')
+  console.log('Your score: ', playerScore)
+  console.log(chalk.blue(`Your hand: ${JSON.stringify(player, null, 2)}`))
+  console.log('-----------------------------------')
+  console.log(chalk.yellow('Dealer turn'))
+
+  /** Dealer turn */
+  let dealerScore: number = calculateScore(dealer)
+  while (true) {
+    console.log(chalk.yellow(`Dealer hand: ${JSON.stringify(dealer, null, 2)}`))
+
+    if (dealerScore <= playerScore) {
+      // Dealer hits
+      dealer.push(deck.drawCard())
+    } else {
+      // dealer chose to stay + wins
+      dealerScore = calculateScore(dealer)
+      break
+    }
+
+    // Calculate dealer current score
+    dealerScore = calculateScore(dealer)
+
+    if (dealerScore > 21) {
+      console.log('-----------------------------------')
+      console.log(chalk.red(`Dealer busts with score ${dealerScore}`))
+      console.log(chalk.green(`Player wins with score ${playerScore}`))
+      console.log('-----------------------------------')
+      console.log(chalk.red(`Dealer hand: ${JSON.stringify(dealer, null, 2)}`))
+      console.log(
+        chalk.green(`Player hand: ${JSON.stringify(player, null, 2)}`)
+      )
+      console.log('-----------------------------------')
+      process.exit(0)
+    }
+  }
+
+  console.log('-----------------------------------')
+  console.log(chalk.green(`Dealer wins with score ${dealerScore}`))
+  console.log(chalk.red(`Player loses with score ${playerScore}`))
+  console.log('-----------------------------------')
+  console.log(chalk.green(`Dealer hand: ${JSON.stringify(dealer, null, 2)}`))
+  console.log(chalk.red(`Player hand: ${JSON.stringify(player, null, 2)}`))
+  console.log('-----------------------------------')
 }
 
 main()

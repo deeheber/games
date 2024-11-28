@@ -11,6 +11,7 @@ Programming various games for fun
 
 ## Coming Later ™️
 
+- Hangman
 - Use plain cards to create go fish
 - Connect 4
 - Minesweeper

@@ -1,26 +1,24 @@
-# cards
+# 🃏 Cards
 
-## Install instructions
+A deck of cards library with playable card games.
+
+## 🚀 Getting started
 
 1. Make sure you have [Node.js](https://nodejs.org/en/) v20.12.0 or later installed
-2. In the terminal run `npm install` to install your dependencies
-3. `npm test` runs unit tests
+2. `npm install`
+3. `npm test` — runs unit tests
 
-## How to play the game(s)
+## Games
 
 ### Blackjack
 
-#### Rules
+Run `npm run blackjack` to start a game, then follow the prompts.
 
-- The game starts with a dealer and a player (you) with two cards
-- The goal is to get as close to 21 as possible without going over
-- The player goes first and can choose to hit (get another card) or stand (end their turn)
-- If the player goes over 21, they bust and lose the game
-- If the player stands, the dealer will hit until they either beat the player or bust
+**Rules:**
 
-If the dealer busts, the player wins
-
-#### Start the game
-
-1. In the terminal run `npm run blackjack` to start the game
-2. Follow the instructions in the terminal to play the game
+- You and the dealer each start with two cards
+- Goal: get as close to 21 as possible without going over
+- You go first — choose to hit (draw another card) or stand (end your turn)
+- If you go over 21, you bust and lose
+- The dealer hits until they beat your score or bust
+- If the dealer busts, you win 🎉

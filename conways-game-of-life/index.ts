@@ -94,5 +94,4 @@ for (let counter = 0; counter < ROUNDS; counter++) {
   console.log('------------------------')
 }
 
-exports.createGrid = createGrid
-exports.transition = transition
+export { createGrid, transition }

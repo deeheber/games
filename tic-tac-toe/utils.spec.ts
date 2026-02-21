@@ -23,6 +23,14 @@ describe('checkForWinner', () => {
     expect(checkForWinner(played['O'])).toBe(true)
   })
 
+  it('Declares winner on anti-diagonal', () => {
+    played['X'].add(3)
+    played['X'].add(5)
+    played['X'].add(7)
+
+    expect(checkForWinner(played['X'])).toBe(true)
+  })
+
   it('Declares O has not won (yet)', () => {
     played['O'].add(1)
     played['O'].add(9)

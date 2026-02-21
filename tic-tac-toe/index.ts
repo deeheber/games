@@ -1,6 +1,6 @@
-import inquirer from 'inquirer'
-import chalk from 'chalk'
-import { checkForWinner, printBoard, validatePrompt } from './utils'
+import { number } from '@inquirer/prompts'
+import { styleText } from 'node:util'
+import { checkForWinner, printBoard, validatePrompt } from './utils.js'
 ;(async function main() {
   const numToArray: Record<number, Array<number>> = {
     1: [0, 0],
@@ -26,36 +26,32 @@ import { checkForWinner, printBoard, validatePrompt } from './utils'
   }
   let currentPlayer = 'X'
   let winner: string | null = null
-  let prompt
+  let selection: number | undefined
 
   // TODO add a cool ascii art type of intro/instructions here
-  console.log(chalk.blue('Welcome to tic-tac-toe.'))
+  console.log(styleText('blue', 'Welcome to tic-tac-toe.'))
   console.log(
-    chalk.blue('Get three in a row across, up/down, or diagonal and you win!')
+    styleText('blue', 'Get three in a row across, up/down, or diagonal and you win!')
   )
-  console.log(chalk.blue('Select 1 - 9 to get started'))
+  console.log(styleText('blue', 'Select 1 - 9 to get started'))
 
   do {
     printBoard(board)
 
     try {
-      prompt = await inquirer.prompt([
-        {
-          type: 'number',
-          name: 'selection',
-          message: `Player ${currentPlayer}, please make your choice`,
-        },
-      ])
+      selection = await number({
+        message: `Player ${currentPlayer}, please make your choice`,
+      })
 
-      validatePrompt(prompt.selection, played)
+      validatePrompt(selection, played)
     } catch (err: any) {
       console.log(err.message)
       continue
     }
 
     // Mark square as played
-    played[currentPlayer].add(prompt.selection)
-    const [x, y] = numToArray[prompt.selection]
+    played[currentPlayer].add(selection!)
+    const [x, y] = numToArray[selection!]
     board[x][y] = currentPlayer
 
     // Check to see if they won
@@ -71,8 +67,8 @@ import { checkForWinner, printBoard, validatePrompt } from './utils'
   printBoard(board)
 
   if (winner) {
-    console.log(chalk.green(`Winner is ${winner}`))
+    console.log(styleText('green', `Winner is ${winner}`))
   } else {
-    console.log(chalk.yellow('It was a tie!'))
+    console.log(styleText('yellow', 'It was a tie!'))
   }
 })()

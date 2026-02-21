@@ -1,4 +1,5 @@
-import { checkForWinner, printBoard, validatePrompt } from './utils'
+import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { checkForWinner, printBoard, validatePrompt } from './utils.js'
 
 describe('checkForWinner', () => {
   let played: Record<string, Set<number>>
@@ -43,7 +44,7 @@ describe('checkForWinner', () => {
 describe('printBoard', () => {
   beforeEach(() => {
     // Don't spam the console with logs for tests
-    console.log = jest.fn()
+    console.log = vi.fn()
   })
 
   it('Prints empty board', () => {

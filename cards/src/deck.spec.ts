@@ -1,4 +1,5 @@
-import { Deck, suits, values } from './deck'
+import { describe, it, expect } from 'vitest'
+import { Deck, suits, values } from './deck.js'
 
 describe('Deck', () => {
   const myDeck = new Deck()

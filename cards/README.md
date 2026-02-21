@@ -2,7 +2,7 @@
 
 ## Install instructions
 
-1. Make sure you have [NodeJS and npm](https://nodejs.org/en/) installed
+1. Make sure you have [Node.js](https://nodejs.org/en/) v20.12.0 or later installed
 2. In the terminal run `npm install` to install your dependencies
 3. `npm test` runs unit tests
 

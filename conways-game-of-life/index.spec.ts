@@ -1,10 +1,12 @@
-global.console = { ...global.console, log: jest.fn() }
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+
+global.console = { ...global.console, log: vi.fn() }
 
 describe("Conway's Game of Life", () => {
   const env = process.env
 
   beforeEach(() => {
-    jest.resetModules()
+    vi.resetModules()
     process.env = { ...env }
   })
 
@@ -13,8 +15,8 @@ describe("Conway's Game of Life", () => {
   })
 
   describe('createGrid', () => {
-    it('should create a grid', () => {
-      const myModule = require('./index')
+    it('should create a grid', async () => {
+      const myModule = await import('./index.js')
       const grid = myModule.createGrid()
 
       expect(grid).toEqual([
@@ -24,11 +26,11 @@ describe("Conway's Game of Life", () => {
       ])
     })
 
-    it('should create a grid with 10 rows and 7 columns', () => {
+    it('should create a grid with 10 rows and 7 columns', async () => {
       process.env.ROWS = '10'
       process.env.COLUMNS = '7'
 
-      const myModule = require('./index')
+      const myModule = await import('./index.js')
       const grid = myModule.createGrid()
 
       expect(grid).toEqual([
@@ -45,12 +47,12 @@ describe("Conway's Game of Life", () => {
       ])
     })
 
-    it('should create a grid with 2 rows and 2 columns and 1 live cell', () => {
+    it('should create a grid with 2 rows and 2 columns and 1 live cell', async () => {
       process.env.ROWS = '2'
       process.env.COLUMNS = '2'
       process.env.LIVE_CELLS = '1'
 
-      const myModule = require('./index')
+      const myModule = await import('./index.js')
       const grid = myModule.createGrid()
 
       expect(grid).toEqual([
@@ -61,8 +63,8 @@ describe("Conway's Game of Life", () => {
   })
 
   describe('transition', () => {
-    it('should transition a 3x3 grid', () => {
-      const myModule = require('./index')
+    it('should transition a 3x3 grid', async () => {
+      const myModule = await import('./index.js')
       const grid = myModule.createGrid()
       const newGrid = myModule.transition(grid)
 
@@ -73,12 +75,12 @@ describe("Conway's Game of Life", () => {
       ])
     })
 
-    it('should transition a 5x7 grid with 15 live cells', () => {
+    it('should transition a 5x7 grid with 15 live cells', async () => {
       process.env.ROWS = '5'
       process.env.COLUMNS = '7'
       process.env.LIVE_CELLS = '15'
 
-      const myModule = require('./index')
+      const myModule = await import('./index.js')
       const grid = myModule.createGrid()
       const newGrid = myModule.transition(grid)
 

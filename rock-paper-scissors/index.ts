@@ -1,38 +1,32 @@
-import inquirer from 'inquirer'
-import chalk from 'chalk'
-import { getComputerChoice, calculateWinner } from './utils'
+import { select, confirm } from '@inquirer/prompts'
+import { styleText } from 'node:util'
+import { getComputerChoice, calculateWinner } from './utils.js'
 ;(async function main() {
   const score = { computer: 0, user: 0, tie: 0 }
   let rounds = 0
-  let prompt
-  let computer
+  let playAgain
 
   do {
-    prompt = await inquirer.prompt([
-      {
-        type: 'list',
-        name: 'user',
-        message: 'What will it be?',
-        choices: ['rock', 'paper', 'scissors'],
-      },
-    ])
+    const user = await select({
+      message: 'What will it be?',
+      choices: [
+        { value: 'rock' as const },
+        { value: 'paper' as const },
+        { value: 'scissors' as const },
+      ],
+    })
 
-    const { user } = prompt
-    computer = getComputerChoice()
+    const computer = getComputerChoice()
     const winner = calculateWinner(user, computer)
 
     score[winner]++
     rounds++
 
-    prompt = await inquirer.prompt([
-      {
-        type: 'confirm',
-        name: 'playAgain',
-        message: 'Would you like to play again?',
-        default: true,
-      },
-    ])
-  } while (prompt.playAgain)
+    playAgain = await confirm({
+      message: 'Would you like to play again?',
+      default: true,
+    })
+  } while (playAgain)
 
   console.log('----------------------')
   console.log('Thanks for playing!')
@@ -44,16 +38,16 @@ import { getComputerChoice, calculateWinner } from './utils'
   console.log('----------------------')
 
   if (score.user > score.computer) {
-    console.log(chalk.green('Congratulations, you won overall!'))
+    console.log(styleText('green', 'Congratulations, you won overall!'))
   }
 
   if (score.computer > score.user) {
     console.log(
-      chalk.red('Sorry, the computer beat you. Better luck next time.')
+      styleText('red', 'Sorry, the computer beat you. Better luck next time.')
     )
   }
 
   if (score.computer === score.user) {
-    console.log(chalk.yellow('It was a tie overall.'))
+    console.log(styleText('yellow', 'It was a tie overall.'))
   }
 })()

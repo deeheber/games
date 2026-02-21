@@ -1,13 +1,10 @@
-# tic-tac-toe
+# ❌⭕ Tic-Tac-Toe
 
-## How to play the game
+Two players take turns placing X and O on a 3x3 grid. Get three in a row — horizontally, vertically, or diagonally — to win.
 
-Two players take turns one is "X" and the other is "O"
-The goal is to get three in a row of your letter. Up and down, left and right, or diagonal.
+## 🚀 Getting started
 
-## Instructions
-
-1. Make sure you have [NodeJS and npm](https://nodejs.org/en/) installed
-2. In the terminal run `npm install` to install your dependencies
-3. `npm start` begins the game
-4. `npm test` runs unit tests
+1. Make sure you have [Node.js](https://nodejs.org/en/) v20.12.0 or later installed
+2. `npm install`
+3. `npm start` — play the game
+4. `npm test` — runs unit tests

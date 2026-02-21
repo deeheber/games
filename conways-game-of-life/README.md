@@ -1,25 +1,27 @@
-# Conway's Game of Life
+# 🦠 Conway's Game of Life
 
-## How to play the game
+A code recreation of [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) — a zero-player game where the initial state of the board determines the rest of the game.
 
-This is a code recreation of [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life). It is a zero player game where the initial state of the board determines the rest of the game.
+## Rules
 
-Rules:
+1. Any live cell with fewer than two live neighbours dies (underpopulation)
+2. Any live cell with two or three live neighbours lives on to the next generation
+3. Any live cell with more than three live neighbours dies (overpopulation)
+4. Any dead cell with exactly three live neighbours becomes a live cell (reproduction)
 
-1. Any live cell with fewer than two live neighbours dies, as if by underpopulation.
-2. Any live cell with two or three live neighbours lives on to the next generation.
-3. Any live cell with more than three live neighbours dies, as if by overpopulation.
-4. Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
+Dead cells are represented by `-` and live cells by `*`.
 
-For the sake of this game, a dead cell is represented by `-` and a live cell is represented by `*`.
+## 🚀 Getting started
 
-## Instructions
+1. Make sure you have [Node.js](https://nodejs.org/en/) v20.12.0 or later installed
+2. `npm install`
+3. `npm start` — runs the simulation
+4. `npm test` — runs unit tests
 
-1. Make sure you have [NodeJS](https://nodejs.org/en/) installed
-2. `npm install` to install your dependencies
-3. `npm start` begins the game
-4. `npm test` runs unit tests
+## Configuration
 
-By default this will be a 3 x 3 board. It will also do one round and default to a grid with all live cells. You can change the size of the board, number of rounds, and number of live cells at the start by passing in arguments to the command line.
+By default this runs a 3x3 board for one round with all live cells. Customize via environment variables:
 
-Example: `ROWS=5 COLUMNS=5 ROUNDS=10 LIVE_CELLS=7 node index.js` will create a 5 x 5 board and run 10 rounds.
+```sh
+ROWS=5 COLUMNS=5 ROUNDS=10 LIVE_CELLS=7 npm start
+```

@@ -1,7 +1,7 @@
-import inquirer from 'inquirer'
-import chalk from 'chalk'
+import { confirm } from '@inquirer/prompts'
+import { styleText } from 'node:util'
 
-import { Card, Deck } from './deck'
+import { Card, Deck } from './deck.js'
 
 function calculateScore(hand: Card[]): number {
   const tens = 'JQK'
@@ -33,7 +33,7 @@ function calculateScore(hand: Card[]): number {
 }
 
 async function main() {
-  console.log(chalk.yellow('------ Starting the game ------'))
+  console.log(styleText('yellow', '------ Starting the game ------'))
 
   const deck = new Deck()
 
@@ -56,18 +56,11 @@ async function main() {
   let playerScore: number = calculateScore(player)
   while (true) {
     console.log('Your score: ', playerScore)
-    console.log(chalk.blue(`Your hand: ${JSON.stringify(player, null, 2)}`))
+    console.log(styleText('blue', `Your hand: ${JSON.stringify(player, null, 2)}`))
 
-    const prompt = await inquirer.prompt([
-      {
-        type: 'confirm',
-        name: 'hit',
-        message: 'Would you like to hit?',
-        default: true,
-      },
-    ])
+    const hit = await confirm({ message: 'Would you like to hit?', default: true })
 
-    if (prompt.hit) {
+    if (hit) {
       player.push(deck.drawCard())
     } else {
       // player chose to stay
@@ -79,22 +72,22 @@ async function main() {
     playerScore = calculateScore(player)
 
     if (playerScore > 21) {
-      console.log(chalk.red(`You bust with score ${playerScore}`))
-      console.log(chalk.red(`Your hand: ${JSON.stringify(player, null, 2)}`))
+      console.log(styleText('red', `You bust with score ${playerScore}`))
+      console.log(styleText('red', `Your hand: ${JSON.stringify(player, null, 2)}`))
       process.exit(0)
     }
   }
 
   console.log('-----------------------------------')
   console.log('Your score: ', playerScore)
-  console.log(chalk.blue(`Your hand: ${JSON.stringify(player, null, 2)}`))
+  console.log(styleText('blue', `Your hand: ${JSON.stringify(player, null, 2)}`))
   console.log('-----------------------------------')
-  console.log(chalk.yellow('Dealer turn'))
+  console.log(styleText('yellow', 'Dealer turn'))
 
   /** Dealer turn */
   let dealerScore: number = calculateScore(dealer)
   while (true) {
-    console.log(chalk.yellow(`Dealer hand: ${JSON.stringify(dealer, null, 2)}`))
+    console.log(styleText('yellow', `Dealer hand: ${JSON.stringify(dealer, null, 2)}`))
 
     if (dealerScore <= playerScore) {
       // Dealer hits
@@ -110,12 +103,12 @@ async function main() {
 
     if (dealerScore > 21) {
       console.log('-----------------------------------')
-      console.log(chalk.red(`Dealer busts with score ${dealerScore}`))
-      console.log(chalk.green(`Player wins with score ${playerScore}`))
+      console.log(styleText('red', `Dealer busts with score ${dealerScore}`))
+      console.log(styleText('green', `Player wins with score ${playerScore}`))
       console.log('-----------------------------------')
-      console.log(chalk.red(`Dealer hand: ${JSON.stringify(dealer, null, 2)}`))
+      console.log(styleText('red', `Dealer hand: ${JSON.stringify(dealer, null, 2)}`))
       console.log(
-        chalk.green(`Player hand: ${JSON.stringify(player, null, 2)}`)
+        styleText('green', `Player hand: ${JSON.stringify(player, null, 2)}`)
       )
       console.log('-----------------------------------')
       process.exit(0)
@@ -123,11 +116,11 @@ async function main() {
   }
 
   console.log('-----------------------------------')
-  console.log(chalk.green(`Dealer wins with score ${dealerScore}`))
-  console.log(chalk.red(`Player loses with score ${playerScore}`))
+  console.log(styleText('green', `Dealer wins with score ${dealerScore}`))
+  console.log(styleText('red', `Player loses with score ${playerScore}`))
   console.log('-----------------------------------')
-  console.log(chalk.green(`Dealer hand: ${JSON.stringify(dealer, null, 2)}`))
-  console.log(chalk.red(`Player hand: ${JSON.stringify(player, null, 2)}`))
+  console.log(styleText('green', `Dealer hand: ${JSON.stringify(dealer, null, 2)}`))
+  console.log(styleText('red', `Player hand: ${JSON.stringify(player, null, 2)}`))
   console.log('-----------------------------------')
 }
 

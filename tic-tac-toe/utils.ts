@@ -1,4 +1,4 @@
-import chalk from 'chalk'
+import { styleText } from 'node:util'
 
 function checkForWinner(played: Set<number>) {
   const winningCombos = [
@@ -9,6 +9,7 @@ function checkForWinner(played: Set<number>) {
     [2, 5, 8],
     [3, 6, 9],
     [1, 5, 9],
+    [3, 5, 7],
   ]
 
   for (let combo of winningCombos) {
@@ -35,12 +36,13 @@ function printBoard(board: string[][]) {
 function validatePrompt(input: any, played: Record<string, Set<number>>) {
   // I didn't like inquirer's built in validator
   if (isNaN(input) || input > 9 || input < 1) {
-    throw new Error(chalk.red('Number must be in range 1 - 9'))
+    throw new Error(styleText('red', 'Number must be in range 1 - 9'))
   }
 
   if (played['X'].has(input) || played['O'].has(input)) {
     throw new Error(
-      chalk.red(
+      styleText(
+        'red',
         `Square ${input} has already been played. Select another square`
       )
     )

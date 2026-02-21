@@ -1,16 +1,15 @@
-# rock-paper-scissors
+# ✊ Rock Paper Scissors
 
-## How to play the game
+The classic game — you vs. the computer.
 
-Each player selects rock paper or scissors
-Rock smashed scissors
-Paper covers rock
-Scissors cuts paper
-If both players pick the same item, it's a tie
+- ✊ Rock smashes scissors
+- 📄 Paper covers rock
+- ✂️ Scissors cuts paper
+- Same choice = tie
 
-## Install instructions
+## 🚀 Getting started
 
-1. Make sure you have [NodeJS and npm](https://nodejs.org/en/) installed
-2. In the terminal run `npm install` to install your dependencies
-3. `npm start` begins the game
-4. `npm test` runs unit tests
+1. Make sure you have [Node.js](https://nodejs.org/en/) v20.12.0 or later installed
+2. `npm install`
+3. `npm start` — play the game
+4. `npm test` — runs unit tests

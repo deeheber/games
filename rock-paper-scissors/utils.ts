@@ -1,4 +1,4 @@
-import chalk from 'chalk'
+import { styleText } from 'node:util'
 
 type Choice = 'rock' | 'paper' | 'scissors'
 
@@ -25,51 +25,51 @@ function calculateWinner(
 
   if (user === 'rock') {
     if (computer === 'rock') {
-      console.log(chalk.yellow("It's a tie!"))
+      console.log(styleText('yellow', "It's a tie!"))
       return 'tie'
     }
 
     if (computer === 'paper') {
-      console.log(chalk.red('Paper covers rock.'))
+      console.log(styleText('red', 'Paper covers rock.'))
       return 'computer'
     }
 
     if (computer === 'scissors') {
-      console.log(chalk.green('Rock smashes scissors.'))
+      console.log(styleText('green', 'Rock smashes scissors.'))
       return 'user'
     }
   }
 
   if (user === 'scissors') {
     if (computer === 'scissors') {
-      console.log(chalk.yellow("It's a tie!"))
+      console.log(styleText('yellow', "It's a tie!"))
       return 'tie'
     }
 
     if (computer === 'paper') {
-      console.log(chalk.green('Scissors cuts paper.'))
+      console.log(styleText('green', 'Scissors cuts paper.'))
       return 'user'
     }
 
     if (computer === 'rock') {
-      console.log(chalk.red('Rock smashes scissors.'))
+      console.log(styleText('red', 'Rock smashes scissors.'))
       return 'computer'
     }
   }
 
   if (user === 'paper') {
     if (computer === 'paper') {
-      console.log(chalk.yellow("It's a tie!"))
+      console.log(styleText('yellow', "It's a tie!"))
       return 'tie'
     }
 
     if (computer === 'rock') {
-      console.log(chalk.green('Paper covers rock.'))
+      console.log(styleText('green', 'Paper covers rock.'))
       return 'user'
     }
 
     if (computer === 'scissors') {
-      console.log(chalk.red('Scissors cuts paper.'))
+      console.log(styleText('red', 'Scissors cuts paper.'))
       return 'computer'
     }
   }
